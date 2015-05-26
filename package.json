@@ -27,15 +27,15 @@
     "stylus": "^0.51.x"
   },
   "scripts": {
-    "dev": "npm run open -s & parallelshell \"npm run live-reload -s\" \"npm run serve -s\" \"npm run watch:dev -s\"",
+    "dev": "npm run open -s & parallelshell \"npm run live-reload -s\" \"npm run serve -s\" \"npm run watch -s\"",
     "build": "npm run build:scripts -s && npm run build:styles -s && npm run build:markup -s",
 
     "serve": "http-server -p 9090 dist/",
     "open": "opener http://localhost:9090",
     "live-reload": "live-reload --port 9091 dist/",
 
-    "watch": "npm run dev:scripts -s && npm run dev:styles -s && npm run dev:markup -s",
-    "watch:dev": "nodemon -q -w src/ --ext '.' --exec 'npm run watch'",
+    "watch": "nodemon -q -w src/ --ext '.' --exec 'npm run watch:dev'",
+    "watch:dev": "npm run dev:scripts -s && npm run dev:styles -s && npm run dev:markup -s",
 
     "dev:markup": "jade src/markup/index.jade -o dist",
     "dev:styles": "stylus src/styles/main.styl -m -o dist/",
