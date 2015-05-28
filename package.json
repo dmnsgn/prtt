@@ -16,24 +16,22 @@
   "license": "ISC",
   "devDependencies": {
     "babelify": "^6.1.x",
-    "browser-sync": "^2.7.5",
+    "browser-sync": "^2.7.x",
     "browserify": "^10.2.x",
     "minifyify": "^7.0.x",
-    "nodemon": "^1.3.x",
     "parallelshell": "^1.1.x",
     "rimraf": "^2.3.x",
-    "stylus": "^0.51.x"
+    "stylus": "^0.51.x",
+    "watchify": "^3.2.x"
   },
   "scripts": {
-    "dev": "npm run open -s & parallelshell \"npm run browser-sync -s\" \"npm run watch -s\"",
-    "build": "npm run build:scripts -s && npm run build:styles -s",
-    "browser-sync": "browser-sync start --server \"dist\" --files \"dist/*.css, dist/*.html, dist/*.js\"",
-    "watch": "nodemon -q -w src/ --ext '.' --exec 'npm run watch:dev'",
-    "watch:dev": "npm run dev:scripts -s && npm run dev:styles -s",
-    "dev:scripts": "browserify -d src/scripts/main.js -t [babelify] -p [minifyify --compressPath . --map main.js.map --output dist/main.js.map] -o dist/main.js",
-    "dev:styles": "stylus src/styles/main.styl -m -o dist/",
-    "build:scripts": "browserify src/scripts/main.js -t [babelify] -o dist/main.js",
-    "build:styles": "stylus src/styles/main.styl -o dist/",
-    "clean": "rimraf dist/*"
+    "dev": "parallelshell \"npm run dev:scripts\" \"npm run dev:styles -s\" \"npm run browser-sync -s\"",
+    "build": "npm run build:scripts -s && npm run build:styles -s && rimraf dist/*.map",
+    "clean": "rimraf dist/{*.css,*.js,*.map}",
+    "browser-sync": "browser-sync start --server 'dist' --files 'dist/*.css, dist/*.html, dist/*.js'",
+    "dev:scripts": "watchify -d src/scripts/main.js -t [babelify] -p [minifyify --compressPath . --map main.js.map --output dist/main.js.map] -o dist/main.js",
+    "dev:styles": "stylus src/styles/main.styl -w -o dist/ -m",
+    "build:scripts": "browserify -d src/scripts/main.js -t [babelify] -p [minifyify --compressPath . --map main.js.map --output dist/main.js.map] -o dist/main.js",
+    "build:styles": "stylus src/styles/main.styl -o dist/ -c"
   }
 }
