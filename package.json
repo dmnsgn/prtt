@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Boilerplate for prototype using es6",
   "main": "dist/main.js",
+  "homepage": "https://github.com/dmnsgn/es6-prototype-boilerplate",
   "repository": {
     "type": "git",
-    "url": "https://dmnsgn@bitbucket.org/dmnsgn/es6-prototype-boilerplate.git"
+    "url": "https://github.com/dmnsgn/es6-prototype-boilerplate.git"
+  },
+  "issues": {
+    "url": "https://github.com/dmnsgn/es6-prototype-boilerplate/issues"
   },
   "keywords": [
     "es6",
