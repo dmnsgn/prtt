@@ -1,0 +1,50 @@
+{
+  "name": "es6-prototype-boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate for prototype using es6",
+  "main": "dist/main.js",
+  "homepage": "https://github.com/dmnsgn/es6-prototype-boilerplate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmnsgn/es6-prototype-boilerplate.git"
+  },
+  "issues": {
+    "url": "https://github.com/dmnsgn/es6-prototype-boilerplate/issues"
+  },
+  "keywords": [
+    "es6",
+    "prototype",
+    "boilerplate"
+  ],
+  "author": "Damien Seguin <https://twitter.com/dmnsgn>",
+  "license": "ISC",
+  "devDependencies": {
+    "babelify": "^6.1.x",
+    "browser-sync": "^2.7.x",
+    "browserify": "^10.2.x",
+    "minifyify": "^7.0.x",
+    "parallelshell": "^1.1.x",
+    "rimraf": "^2.3.x",
+    "stylus": "^0.51.x",
+    "watchify": "^3.2.x"
+  },
+  "paths": {
+    "src": "src",
+    "dest": "dist",
+    "vendor": "src/scripts/vendor"
+  },
+  "vendor": {
+    "three": "three.js",
+    "dat": "dat.gui.js"
+  },
+  "scripts": {
+    "dev": "node scripts/vendor.js && parallelshell \"npm run dev:scripts\" \"npm run dev:styles -s\" \"npm run browser-sync -s\"",
+    "build": "npm run build:scripts -s && npm run build:styles -s && rimraf dist/*.map",
+    "clean": "rimraf dist/{*.css,*.js,*.map}",
+    "browser-sync": "browser-sync start --server 'dist' --files 'dist/*.css, dist/*.html, dist/*.js' --no-ui",
+    "dev:scripts": "watchify -d src/scripts/main.js -t [babelify] -p [minifyify --compressPath . --map main.js.map --output dist/main.js.map] -o dist/main.js",
+    "dev:styles": "stylus src/styles/main.styl -w -o dist/ -m",
+    "build:scripts": "browserify -d src/scripts/main.js -t [babelify] -o dist/main.js && uglifyjs dist/main.js -o dist/main.js",
+    "build:styles": "stylus src/styles/main.styl -o dist/ -c"
+  }
+}
