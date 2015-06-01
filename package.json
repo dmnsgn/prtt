@@ -35,6 +35,8 @@
   },
   "vendor": {
     "three": "three.js",
+    "sketch": "sketch.js",
+    "Stats": "stats.js",
     "dat": "dat.gui.js"
   },
   "scripts": {
