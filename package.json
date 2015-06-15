@@ -1,6 +1,6 @@
 {
   "name": "es6-prototype-boilerplate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Boilerplate for prototype using es6",
   "main": "dist/main.js",
   "homepage": "https://github.com/dmnsgn/es6-prototype-boilerplate",
@@ -22,7 +22,6 @@
     "babelify": "^6.1.x",
     "browser-sync": "^2.7.x",
     "browserify": "^10.2.x",
-    "minifyify": "^7.0.x",
     "parallelshell": "^1.1.x",
     "rimraf": "^2.3.x",
     "stylus": "^0.51.x",
@@ -44,7 +43,7 @@
     "build": "npm run build:scripts -s && npm run build:styles -s && rimraf dist/*.map",
     "clean": "rimraf dist/{*.css,*.js,*.map}",
     "browser-sync": "browser-sync start --server 'dist' --files 'dist/*.css, dist/*.html, dist/*.js' --no-ui",
-    "dev:scripts": "watchify -d src/scripts/main.js -t [babelify] -p [minifyify --compressPath . --map main.js.map --output dist/main.js.map] -o dist/main.js",
+    "dev:scripts": "watchify -d src/scripts/main.js -t [babelify] -o dist/main.js",
     "dev:styles": "stylus src/styles/main.styl -w -o dist/ -m",
     "build:scripts": "browserify -d src/scripts/main.js -t [babelify] -o dist/main.js && uglifyjs dist/main.js -o dist/main.js",
     "build:styles": "stylus src/styles/main.styl -o dist/ -c"
