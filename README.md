@@ -5,7 +5,7 @@ es6-prototype-boilerplate
 
 ## Install
 ```bash
-git clone https://github.com/dmnsgn/es6-prototype-boilerplate.git && cd es6-prototype-boilerplate/ && rm -rf .git
+git clone --depth 1 https://github.com/dmnsgn/es6-prototype-boilerplate.git && cd es6-prototype-boilerplate/ && rm -rf .git
 npm i
 ```
 
