@@ -1,6 +1,6 @@
 {
   "name": "es6-prototype-boilerplate",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Boilerplate for prototype using es6",
   "main": "dist/main.js",
   "homepage": "https://github.com/dmnsgn/es6-prototype-boilerplate",
