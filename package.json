@@ -1,6 +1,6 @@
 {
   "name": "es6-prototype-boilerplate",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Boilerplate for prototype using es6",
   "main": "dist/main.js",
   "homepage": "https://github.com/dmnsgn/es6-prototype-boilerplate",
@@ -27,6 +27,10 @@
     "stylus": "^0.51.x",
     "watchify": "^3.2.x"
   },
+  "dependencies": {
+    "get-canvas-context": "^1.0.1",
+    "raf-loop": "^1.1.3"
+  },
   "paths": {
     "src": "src",
     "dest": "dist",
@@ -34,7 +38,6 @@
   },
   "vendor": {
     "three": "three.js",
-    "sketch": "sketch.js",
     "Stats": "stats.js",
     "dat": "dat.gui.js"
   },

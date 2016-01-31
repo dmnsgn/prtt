@@ -1,15 +1,29 @@
+import loop from 'raf-loop'
+import getContext from 'get-canvas-context'
+
 import AppUI from './AppUI'
 
+import * as Window from '../utils/window'
+
 export default class AppView {
+
   constructor(app, el) {
     this.app = app;
     this.el = el;
   }
 
   init() {
-    this.initAnimationLoop();
 
-    this.ctx.start();
+    // Context
+    this.ctx = getContext('2d');
+    this.el.appendChild(this.ctx.canvas);
+
+    // Engine
+    this.engine = loop(this.tick.bind(this));
+    this.engine.start();
+
+    Window.addResizeCallback(this.onResize.bind(this));
+    this.onResize();
 
     if (this.app.DEBUG) {
       this.initUI();
@@ -18,40 +32,26 @@ export default class AppView {
     return;
   }
 
-  initAnimationLoop() {
-    this.ctx = Sketch.create({
-      type      : Sketch.WEB_GL,
-      container : this.el,
-      autostart : false,
-      autopause : true
-    });
-
-    this.ctx.setup = () => {
-    };
-
-    this.ctx.update = () => {
-      if (this.app.DEBUG) {
-        this.ui.stats.begin();
-      }
-
-
-      if (this.app.DEBUG) {
-        this.ui.stats.end();
-      }
-    };
-
-    this.ctx.draw = () => {
-
-    };
-    this.ctx.resize = () => {
-
-    };
-    return;
-  }
-
   initUI() {
 
     this.ui = new AppUI();
+
+    return;
+  }
+
+  tick(dt) {
+
+    // console.log(dt);
+
+    return;
+  }
+
+  onResize() {
+
+    this.ctx.canvas.width = Window.getWidth() * Window.sizeFactor;
+    this.ctx.canvas.height = Window.getHeight() * Window.sizeFactor;
+    this.ctx.canvas.style.width = Window.getWidth() + 'px';
+    this.ctx.canvas.style.height = Window.getHeight() + 'px';
 
     return;
   }
