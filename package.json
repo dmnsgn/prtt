@@ -27,6 +27,9 @@
     "stylus": "^0.51.x",
     "watchify": "^3.2.x"
   },
+  "dependencies": {
+    "raf-loop": "^1.1.3"
+  },
   "paths": {
     "src": "src",
     "dest": "dist",
@@ -34,7 +37,6 @@
   },
   "vendor": {
     "three": "three.js",
-    "sketch": "sketch.js",
     "Stats": "stats.js",
     "dat": "dat.gui.js"
   },
