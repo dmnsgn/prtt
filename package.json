@@ -1,15 +1,15 @@
 {
-  "name": "es6-prototype-boilerplate",
-  "version": "1.0.5",
-  "description": "Boilerplate for prototype using es6",
-  "main": "dist/main.js",
-  "homepage": "https://github.com/dmnsgn/es6-prototype-boilerplate",
+  "name": "prtt",
+  "version": "2.0.0",
+  "description": "A WebGL prototype starter using Budo, browserify, babelify, glslify, dat.GUI",
+  "main": "src/index.js",
+  "homepage": "https://github.com/dmnsgn/prtt",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dmnsgn/es6-prototype-boilerplate.git"
+    "url": "https://github.com/dmnsgn/prtt.git"
   },
   "issues": {
-    "url": "https://github.com/dmnsgn/es6-prototype-boilerplate/issues"
+    "url": "https://github.com/dmnsgn/prtt/issues"
   },
   "keywords": [
     "es6",
@@ -17,38 +17,47 @@
     "boilerplate"
   ],
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "babelify": "^6.1.x",
-    "browser-sync": "^2.7.x",
-    "browserify": "^10.2.x",
-    "npm-run-all": "^1.5.0",
-    "rimraf": "^2.3.x",
-    "stylus": "^0.51.x",
-    "watchify": "^3.2.x"
+    "babel-polyfill": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "brfs": "^1.4.3",
+    "browserify": "^13.0.1",
+    "budo": "^8.2.2",
+    "eslint": "^2.10.2",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.0",
+    "eslint-plugin-jsx-a11y": "^1.2.2",
+    "eslint-plugin-react": "^5.1.1",
+    "glslify": "^5.0.2",
+    "uglify-js": "^2.6.2"
   },
   "dependencies": {
-    "get-canvas-context": "^1.0.1",
+    "get-canvas-context": "^1.0.2",
+    "gl-checker-background": "^1.0.0",
+    "gl-clear": "^2.0.0",
+    "gl-shader": "^4.2.0",
     "raf-loop": "^1.1.3"
   },
-  "paths": {
-    "src": "src",
-    "dest": "dist",
-    "vendor": "src/scripts/vendor"
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   },
-  "vendor": {
-    "three": "three.js",
-    "Stats": "stats.js",
-    "dat": "dat.gui.js"
+  "eslintConfig": {
+    "extends": "airbnb",
+    "rules": {
+      "comma-dangle": 0
+    }
   },
+  "vendor": [
+    "./src/vendor/dat.gui.js",
+    "./src/vendor/optimizedResize.js"
+  ],
   "scripts": {
-    "dev": "node scripts/vendor.js && npm-run-all --parallel dev:scripts dev:styles serve",
-    "build": "npm-run-all --parallel build:scripts build:styles rimraf dist/*.map",
-    "clean": "rimraf dist/{*.css,*.js,*.map}",
-    "serve": "browser-sync start --server 'dist' --files 'dist/*.css, dist/*.html, dist/*.js' --no-ui",
-    "dev:scripts": "watchify -d src/scripts/main.js -t [babelify] -o dist/main.js",
-    "dev:styles": "stylus src/styles/main.styl -w -o dist/ -m",
-    "build:scripts": "browserify -d src/scripts/main.js -t [babelify] -o dist/main.js && uglifyjs dist/main.js -o dist/main.js",
-    "build:styles": "stylus src/styles/main.styl -o dist/ -c"
+    "dev": "npm run vendor && budo src/index.js:static/bundle.js --live --open -- -t babelify -t glslify -t brfs",
+    "vendor": "node bin/vendor.js",
+    "build": "browserify src/index.js -t babelify -t glslify -t brfs | uglifyjs -mc > static/bundle.js && npm run vendor && uglifyjs static/vendor.js -mc -o static/vendor.js"
   }
 }
