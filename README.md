@@ -1,18 +1,16 @@
-es6-prototype-boilerplate
+prtt
 =========================
 
-> A boilerplate for prototype using ES6
+> A WebGL prototype starter using Budo, browserify, babelify, glslify, dat.GUI
 
 ## Install
 ```bash
-git clone --depth 1 https://github.com/dmnsgn/es6-prototype-boilerplate.git && cd es6-prototype-boilerplate/ && rm -rf .git
+PROJECTNAME="PRoToType"; git clone --depth 1 https://github.com/dmnsgn/prtt.git $PROJECTNAME && cd $PROJECTNAME && rm -rf .git
 npm i
 ```
 
 ## Scripts
 ### Dev
-
-Start browsersync, watch ES6 scripts (babel) & styles (stylus) with sourcemap and concat vendor using `vendor` key in package.json (`node scripts/vendor.js`).
 
 ```bash
 npm run dev
@@ -20,12 +18,10 @@ npm run dev
 
 ### Build
 
-Minify ES6 scripts (uglify), compress styles and delete sourcemap files.
-
 ```bash
 npm run build
 ```
 
 ## Licence
 
-ISC
+MIT
