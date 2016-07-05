@@ -1,7 +1,7 @@
 prtt
 =========================
 
-> A WebGL prototype starter using Budo, browserify, babelify, glslify, dat.GUI
+> A WebGL prototype starter using Budo, browserify, babelify, glslify, controlkit
 
 ## Install
 ```bash

@@ -1,12 +1,16 @@
-/* global dat */
+import ControlKit from 'controlkit';
 
 export default class AppUI {
   init() {
-    this.initGUI();
+    this.initControls();
   }
 
-  initGUI() {
-    this.gui = new dat.GUI();
-    this.gui.close();
+  initControls() {
+    const controlKit = new ControlKit();
+
+    const panel = controlKit.addPanel({ label: 'Debug Panel', align: 'left' });
+    panel.addGroup({ label: 'Controls' });
+    panel.addButton('STUFF', () => { console.log('STUFF'); });
+    panel.addButton('THING', () => { console.log('THING'); });
   }
 }
