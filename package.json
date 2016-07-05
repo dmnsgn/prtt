@@ -1,6 +1,6 @@
 {
   "name": "prtt",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A WebGL prototype starter using Budo, browserify, babelify, glslify, dat.GUI",
   "main": "src/index.js",
   "homepage": "https://github.com/dmnsgn/prtt",
