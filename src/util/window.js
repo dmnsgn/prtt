@@ -1,7 +1,7 @@
 const w = {
   init() {
-    this.onResize(this.update.bind(this));
-    this.update();
+    this.onResize(this.updateDimensions.bind(this));
+    this.updateDimensions();
   },
 
   width: null,
@@ -9,19 +9,43 @@ const w = {
   center: null,
   devicePixelRatio: window.devicePixelRatio || 1,
 
-  update() {
+  updateDimensions() {
     this.width =
-      window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
     this.height =
-      window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight;
     this.center = {
       x: this.width / 2,
-      y: this.height / 2
+      y: this.height / 2,
     };
   },
 
   onResize(listener, options = false) {
-    window.addEventListener('optimizedResize', listener, options);
+    window.addEventListener('debouncedResize', listener, options);
+  },
+
+  offResize(listener, options = false) {
+    window.removeEventListener('debouncedResize', listener, options);
+  },
+
+  onScroll(listener, options = false) {
+    window.addEventListener('debouncedScroll', listener, options);
+  },
+
+  offScroll(listener, options = false) {
+    window.removeEventListener('debouncedScroll', listener, options);
+  },
+
+  onTouchMove(listener, options = false) {
+    window.addEventListener('debouncedTouchmove', listener, options);
+  },
+
+  offTouchMove(listener, options = false) {
+    window.removeEventListener('debouncedTouchmove', listener, options);
   },
 
   get physicalWidth() {
