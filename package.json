@@ -52,9 +52,7 @@
       "comma-dangle": 0
     }
   },
-  "vendor": [
-    "./src/vendor/optimizedResize.js"
-  ],
+  "vendor": [],
   "scripts": {
     "dev": "npm run vendor && budo src/index.js:static/bundle.js --live --open -- -t babelify -t glslify -t brfs",
     "vendor": "node bin/vendor.js",
