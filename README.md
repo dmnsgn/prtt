@@ -1,7 +1,7 @@
 prtt
 =========================
 
-> A WebGL prototype starter using Budo, browserify, babelify, glslify, controlkit
+> A WebGL prototype starter using Budo, browserify, babelify, glslify, controlkit, ccapture
 
 ## Install
 ```bash
@@ -21,6 +21,11 @@ npm run dev
 ```bash
 npm run build
 ```
+
+|Query string parameters|Description
+|:---------|:---------:|
+|**?debug**|Enable debug panel|
+|**?capture**|Enable ccapture controls|
 
 ## Licence
 

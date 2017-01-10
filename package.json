@@ -1,7 +1,7 @@
 {
   "name": "prtt",
-  "version": "2.1.0",
-  "description": "A WebGL prototype starter using Budo, browserify, babelify, glslify, controlkit",
+  "version": "3.0.0",
+  "description": "A WebGL prototype starter using Budo, browserify, babelify, glslify, controlkit, ccapture",
   "main": "src/index.js",
   "homepage": "https://github.com/dmnsgn/prtt",
   "repository": {
@@ -19,43 +19,46 @@
   "author": "Damien Seguin <https://twitter.com/dmnsgn>",
   "license": "MIT",
   "devDependencies": {
-    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015": "^6.18.0",
     "babelify": "^7.3.0",
     "brfs": "^1.4.3",
-    "browserify": "^13.0.1",
-    "budo": "^9.0.0",
-    "eslint": "^3.0.0",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.8.0",
-    "eslint-plugin-jsx-a11y": "^1.2.2",
-    "eslint-plugin-react": "^5.1.1",
-    "glslify": "^5.0.2",
-    "uglify-js": "^2.6.2"
+    "browserify": "^13.3.0",
+    "budo": "^9.4.1",
+    "eslint": "^3.13.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "uglify-js": "^2.7.5"
   },
   "dependencies": {
-    "babel-polyfill": "^6.9.0",
+    "babel-plugin-glslify": "^2.0.0",
+    "babel-polyfill": "^6.20.0",
+    "ccapture.js": "^1.0.6",
     "controlkit": "^0.1.9",
     "get-canvas-context": "^1.0.2",
     "gl-checker-background": "^1.0.0",
-    "gl-clear": "^2.0.0",
-    "gl-shader": "^4.2.0",
+    "gl-shader": "^4.2.1",
+    "glslify": "^6.0.1",
+    "query-string": "^4.2.3",
     "raf-loop": "^1.1.3"
   },
   "babel": {
     "presets": [
       "es2015"
+    ],
+    "plugins": [
+      "glslify"
     ]
   },
   "eslintConfig": {
-    "extends": "airbnb",
-    "rules": {
-      "comma-dangle": 0
+    "extends": "airbnb-base",
+    "env": {
+      "browser": true
     }
   },
   "vendor": [],
   "scripts": {
-    "dev": "npm run vendor && budo src/index.js:static/bundle.js --live --open -- -t babelify -t glslify -t brfs",
+    "dev": "npm run vendor && budo src/index.js:static/bundle.js --live --open -- -t babelify -t brfs",
     "vendor": "node bin/vendor.js",
-    "build": "browserify src/index.js -t babelify -t glslify -t brfs | uglifyjs -mc > static/bundle.js && npm run vendor && uglifyjs static/vendor.js -mc -o static/vendor.js"
+    "build": "browserify src/index.js -t [ babelify --plugins glslify ] -t brfs | uglifyjs -mc > static/bundle.js && npm run vendor && uglifyjs static/vendor.js -mc -o static/vendor.js"
   }
 }
