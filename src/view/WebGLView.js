@@ -4,6 +4,8 @@ import Base from './base/Base';
 export default class WebGLView {
   constructor(gl) {
     this.gl = gl;
+
+    this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
   }
 
   init() {
@@ -15,12 +17,13 @@ export default class WebGLView {
   }
 
   render() {
-    this.gl.viewport(0, 0, this.gl.drawingBufferWidth, this.gl.drawingBufferHeight);
-
-    this.gl.clearColor(1.0, 1.0, 0.0, 1.0);
-    this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+    this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT | this.gl.STENCIL_BUFFER_BIT);
 
     this.background.draw();
     this.base.draw();
+  }
+
+  resize() {
+    this.gl.viewport(0, 0, this.gl.drawingBufferWidth, this.gl.drawingBufferHeight);
   }
 }

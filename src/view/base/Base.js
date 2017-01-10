@@ -1,5 +1,4 @@
-const glslify = require('glslify');
-
+import glsl from 'glslify';
 import createShader from 'gl-shader';
 
 export default class Base {
@@ -10,8 +9,8 @@ export default class Base {
   init() {
     this.shader = createShader(
       this.gl,
-      glslify('../../shader/base.vert'),
-      glslify('../../shader/base.frag')
+      glsl('../../shader/base.vert'),
+      glsl('../../shader/base.frag'),
     );
 
     this.buffer = this.gl.createBuffer();
@@ -19,7 +18,7 @@ export default class Base {
     this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array([
       -0.5, 0, 0,
       0, -1, 0,
-      0.5, 0.5, 0
+      0.5, 0.5, 0,
     ]), this.gl.STATIC_DRAW);
   }
 
