@@ -1,12 +1,12 @@
-import loop from 'raf-loop';
-import getContext from 'get-canvas-context';
+import loop from "raf-loop";
+import getContext from "get-canvas-context";
 
-import WebGLView from './WebGLView';
+import WebGLView from "View/WebGLView";
 
-import config from '../config';
+import config from "Root/config";
 
-import w from '../util/window';
-import capturer from '../util/capturer';
+import w from "Util/window";
+import capturer from "Util/capturer";
 
 export default class AppView {
   constructor(app) {
@@ -15,7 +15,7 @@ export default class AppView {
 
   init() {
     // Context
-    this.gl = getContext('webgl');
+    this.gl = getContext("webgl");
     this.app.element.appendChild(this.gl.canvas);
 
     // Engine
@@ -35,7 +35,9 @@ export default class AppView {
   tick() {
     this.webGLView.render();
 
-    if (config.parameters.has('capture')) capturer.capture(this.gl.canvas);
+    if (config.parameters.has("capture")) {
+      capturer.capture(this.gl.canvas);
+    }
   }
 
   onResize() {

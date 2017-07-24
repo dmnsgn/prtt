@@ -1,5 +1,5 @@
-import glsl from 'glslify';
-import createShader from 'gl-shader';
+import glsl from "glslify";
+import createShader from "gl-shader";
 
 export default class Base {
   constructor(gl) {
@@ -9,17 +9,22 @@ export default class Base {
   init() {
     this.shader = createShader(
       this.gl,
-      glsl('../../shader/base.vert'),
-      glsl('../../shader/base.frag'),
+      glsl("../../shader/base.vert"),
+      glsl("../../shader/base.frag")
     );
 
     this.buffer = this.gl.createBuffer();
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer);
-    this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array([
-      -0.5, 0, 0,
-      0, -1, 0,
-      0.5, 0.5, 0,
-    ]), this.gl.STATIC_DRAW);
+    this.gl.bufferData(
+      this.gl.ARRAY_BUFFER,
+      // prettier-ignore
+      new Float32Array([
+        -0.5, 0, 0,
+        0, -1, 0,
+        0.5, 0.5, 0
+      ]),
+      this.gl.STATIC_DRAW
+    );
   }
 
   draw() {

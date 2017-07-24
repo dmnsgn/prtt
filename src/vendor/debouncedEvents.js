@@ -1,5 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/Events/resize
-(function () {
+(function() {
   const throttle = (type, name, obj) => {
     obj = obj || window; // eslint-disable-line no-param-reassign
     let running = false;
@@ -17,7 +17,7 @@
   };
 
   /* init - you can init any event */
-  throttle('resize', 'debouncedResize');
-  throttle('scroll', 'debouncedScroll');
-  throttle('touchmove', 'debouncedTouchmove');
-}());
+  throttle("resize", "debouncedResize");
+  throttle("scroll", "debouncedScroll");
+  throttle("touchmove", "debouncedTouchmove");
+})();

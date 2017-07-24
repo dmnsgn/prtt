@@ -1,5 +1,5 @@
-import Checker from './background/Checker';
-import Base from './base/Base';
+import Checker from "View/background/Checker";
+import Base from "View/base/Base";
 
 export default class WebGLView {
   constructor(gl) {
@@ -17,13 +17,22 @@ export default class WebGLView {
   }
 
   render() {
-    this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT | this.gl.STENCIL_BUFFER_BIT);
+    this.gl.clear(
+      this.gl.COLOR_BUFFER_BIT |
+        this.gl.DEPTH_BUFFER_BIT |
+        this.gl.STENCIL_BUFFER_BIT
+    );
 
     this.background.draw();
     this.base.draw();
   }
 
   resize() {
-    this.gl.viewport(0, 0, this.gl.drawingBufferWidth, this.gl.drawingBufferHeight);
+    this.gl.viewport(
+      0,
+      0,
+      this.gl.drawingBufferWidth,
+      this.gl.drawingBufferHeight
+    );
   }
 }

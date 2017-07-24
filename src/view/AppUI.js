@@ -1,8 +1,8 @@
-import ControlKit from 'controlkit';
+import ControlKit from "controlkit";
 
-import config from '../config';
+import config from "Root/config";
 
-import capturer from '../util/capturer';
+import capturer from "Util/capturer";
 
 export default class AppUI {
   constructor(app) {
@@ -16,15 +16,19 @@ export default class AppUI {
   initControls() {
     const controlKit = new ControlKit();
 
-    const panel = controlKit.addPanel({ label: 'Debug UI', align: 'left' });
+    const panel = controlKit.addPanel({ label: "Debug UI", align: "left" });
 
-    const controlsGroup = panel.addGroup({ label: 'Controls' });
-    controlsGroup.addButton('STUFF', () => { console.log('STUFF'); });
-    controlsGroup.addButton('THING', () => { console.log('THING'); });
+    const controlsGroup = panel.addGroup({ label: "Controls" });
+    controlsGroup.addButton("STUFF", () => {
+      console.log("STUFF");
+    });
+    controlsGroup.addButton("THING", () => {
+      console.log("THING");
+    });
 
-    if (config.parameters.has('capture')) {
-      const captureGroup = panel.addGroup({ label: 'Capture' });
-      captureGroup.addButton('Start', () => {
+    if (config.parameters.has("capture")) {
+      const captureGroup = panel.addGroup({ label: "Capture" });
+      captureGroup.addButton("Start", () => {
         capturer.start();
       });
     }

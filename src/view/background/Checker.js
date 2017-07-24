@@ -1,4 +1,4 @@
-import createBackground from 'gl-checker-background';
+import createBackground from "gl-checker-background";
 
 export default class Checker {
   constructor(gl) {

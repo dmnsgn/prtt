@@ -20,32 +20,32 @@ const w = {
       document.body.clientHeight;
     this.center = {
       x: this.width / 2,
-      y: this.height / 2,
+      y: this.height / 2
     };
   },
 
   onResize(listener, options = false) {
-    window.addEventListener('debouncedResize', listener, options);
+    window.addEventListener("debouncedResize", listener, options);
   },
 
   offResize(listener, options = false) {
-    window.removeEventListener('debouncedResize', listener, options);
+    window.removeEventListener("debouncedResize", listener, options);
   },
 
   onScroll(listener, options = false) {
-    window.addEventListener('debouncedScroll', listener, options);
+    window.addEventListener("debouncedScroll", listener, options);
   },
 
   offScroll(listener, options = false) {
-    window.removeEventListener('debouncedScroll', listener, options);
+    window.removeEventListener("debouncedScroll", listener, options);
   },
 
   onTouchMove(listener, options = false) {
-    window.addEventListener('debouncedTouchmove', listener, options);
+    window.addEventListener("debouncedTouchmove", listener, options);
   },
 
   offTouchMove(listener, options = false) {
-    window.removeEventListener('debouncedTouchmove', listener, options);
+    window.removeEventListener("debouncedTouchmove", listener, options);
   },
 
   get physicalWidth() {
@@ -54,7 +54,7 @@ const w = {
 
   get physicalHeight() {
     return this.height * this.devicePixelRatio;
-  },
+  }
 };
 
 w.init();

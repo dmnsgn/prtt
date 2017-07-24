@@ -1,17 +1,21 @@
-import AppView from './view/AppView';
-import AppUI from './view/AppUI';
+import AppView from "View/AppView";
+import AppUI from "View/AppUI";
 
-import config from './config';
+import config from "Root/config";
 
 export default class App {
   constructor(element, options) {
     this.element = element;
-    this.options = Object.assign({
-      debug: config.parameters.has('debug'),
-    }, options);
+    this.options = {
+      ...options,
+      debug: config.parameters.has("debug")
+    };
 
     this.initView();
-    if (this.options.debug || config.parameters.has('capture')) this.initUI();
+
+    if (this.options.debug || config.parameters.has("capture")) {
+      this.initUI();
+    }
   }
 
   initView() {

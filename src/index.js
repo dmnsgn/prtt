@@ -1,9 +1,9 @@
-import 'babel-polyfill';
+import "babel-polyfill";
 
-import './vendor/debouncedEvents';
+import "Root/vendor/debouncedEvents";
 
-import App from './App';
+import App from "Root/App";
 
-document.addEventListener('DOMContentLoaded', () => {
-  window.app = new App(document.querySelector('main'), {});
+document.addEventListener("DOMContentLoaded", () => {
+  window.app = new App(document.querySelector("main"), {});
 });
