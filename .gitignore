@@ -1,3 +1,4 @@
 node_modules
-static/vendor.js
-static/bundle.js
+dist/*
+!dist/static/
+!dist/static/.gitkeep

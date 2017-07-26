@@ -1,51 +1,33 @@
-const w = {
-  init() {
-    this.onResize(this.updateDimensions.bind(this));
-    this.updateDimensions();
-  },
+import { debounce } from "lodash";
 
+export function BindEvent(value, options = false) {
+  return function(target, key, descriptor) {
+    return {
+      configurable: true,
+      enumerable: descriptor.enumerable,
+      get: function getter() {
+        Object.defineProperty(this, key, {
+          configurable: true,
+          enumerable: descriptor.enumerable,
+          value: debounce(descriptor.value, 500)
+        });
+
+        window.addEventListener(value, descriptor.value.bind(this), options);
+
+        return this[key];
+      }
+    };
+  };
+}
+
+const w = {
   width: null,
   height: null,
   center: null,
   devicePixelRatio: window.devicePixelRatio || 1,
 
-  updateDimensions() {
-    this.width =
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth;
-    this.height =
-      window.innerHeight ||
-      document.documentElement.clientHeight ||
-      document.body.clientHeight;
-    this.center = {
-      x: this.width / 2,
-      y: this.height / 2
-    };
-  },
-
-  onResize(listener, options = false) {
-    window.addEventListener("debouncedResize", listener, options);
-  },
-
-  offResize(listener, options = false) {
-    window.removeEventListener("debouncedResize", listener, options);
-  },
-
-  onScroll(listener, options = false) {
-    window.addEventListener("debouncedScroll", listener, options);
-  },
-
-  offScroll(listener, options = false) {
-    window.removeEventListener("debouncedScroll", listener, options);
-  },
-
-  onTouchMove(listener, options = false) {
-    window.addEventListener("debouncedTouchmove", listener, options);
-  },
-
-  offTouchMove(listener, options = false) {
-    window.removeEventListener("debouncedTouchmove", listener, options);
+  init() {
+    this.updateDimensions();
   },
 
   get physicalWidth() {
@@ -54,6 +36,13 @@ const w = {
 
   get physicalHeight() {
     return this.height * this.devicePixelRatio;
+  },
+
+  @BindEvent("resize")
+  updateDimensions() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    this.center = { x: this.width / 2, y: this.height / 2 };
   }
 };
 

@@ -5,7 +5,7 @@ import WebGLView from "View/WebGLView";
 
 import config from "Root/config";
 
-import w from "Util/window";
+import w, { BindEvent } from "Util/window";
 import capturer from "Util/capturer";
 
 export default class AppView {
@@ -20,9 +20,6 @@ export default class AppView {
 
     // Engine
     this.engine = loop(this.tick.bind(this));
-
-    // Listeners
-    w.onResize(this.onResize.bind(this));
 
     // Views
     this.webGLView = new WebGLView(this.gl);
@@ -40,7 +37,9 @@ export default class AppView {
     }
   }
 
-  onResize() {
+  @BindEvent("resize")
+  onResize(event) {
+    console.log(event, this.gl, this.gl.canvas.width, w.width);
     this.gl.canvas.width = w.width;
     this.gl.canvas.height = w.height;
     this.gl.canvas.style.width = `${w.width}px`;

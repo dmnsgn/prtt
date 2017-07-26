@@ -6,11 +6,12 @@ module.exports = {
   entry: src + "/index.js",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "static")
+    path: path.resolve(__dirname, "dist")
   },
   devServer: {
-    contentBase: "./static"
+    contentBase: "./dist"
   },
+  devtool: "inline-source-map",
   resolve: {
     alias: {
       Root: path.resolve(src),
@@ -29,9 +30,9 @@ module.exports = {
           options: {
             presets: ["env"],
             plugins: [
+              "transform-decorators-legacy",
               "transform-class-properties",
               "transform-object-rest-spread",
-              "transform-decorators",
               "glslify"
             ]
           }
