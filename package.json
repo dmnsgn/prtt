@@ -36,19 +36,25 @@
     "webpack-dev-server": "^2.6.1"
   },
   "dependencies": {
+    "async-preloader": "^1.0.0",
     "babel-polyfill": "^6.23.0",
     "ccapture.js": "^1.0.7",
     "controlkit": "^0.1.9",
     "eslint": "^4.3.0",
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-prettier": "^2.1.2",
+    "fontfaceobserver": "^2.0.13",
     "get-canvas-context": "^1.0.2",
     "gl-checker-background": "^1.0.0",
     "gl-shader": "^4.2.1",
     "glslify": "^6.1.0",
     "lodash": "^4.17.4",
     "query-string": "^5.0.0",
-    "raf-loop": "^1.1.3"
+    "raf-loop": "^1.1.3",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "reselect": "^3.0.1",
+    "whatwg-fetch": "^2.0.3"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

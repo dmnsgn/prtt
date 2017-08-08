@@ -9,8 +9,8 @@ export default class Base {
   init() {
     this.shader = createShader(
       this.gl,
-      glsl("../../shader/base.vert"),
-      glsl("../../shader/base.frag")
+      glsl("../../shaders/base.vert"),
+      glsl("../../shaders/base.frag")
     );
 
     this.buffer = this.gl.createBuffer();

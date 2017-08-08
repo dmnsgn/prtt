@@ -15,9 +15,11 @@ module.exports = {
   resolve: {
     alias: {
       Root: path.resolve(src),
-      View: path.resolve(src, "view/"),
-      Shader: path.resolve(src, "shader/"),
-      Util: path.resolve(src, "util/")
+      Containers: path.resolve(src, "containers/"),
+      Components: path.resolve(src, "components/"),
+      Shaders: path.resolve(src, "shaders/"),
+      State: path.resolve(src, "state/"),
+      Utils: path.resolve(src, "utils/")
     }
   },
   module: {

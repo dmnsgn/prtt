@@ -1,12 +1,12 @@
-import loop from "raf-loop";
+import Engine from "raf-loop";
 import getContext from "get-canvas-context";
 
-import WebGLView from "View/WebGLView";
+import WebGL from "Containers/WebGL";
+
+import w, { BindEvent } from "Utils/window";
+import capturer from "Utils/capturer";
 
 import config from "Root/config";
-
-import w, { BindEvent } from "Util/window";
-import capturer from "Util/capturer";
 
 export default class AppView {
   constructor(app) {
@@ -19,18 +19,26 @@ export default class AppView {
     this.app.element.appendChild(this.gl.canvas);
 
     // Engine
-    this.engine = loop(this.tick.bind(this));
+    this.engine = new Engine();
+    this.engine.on("tick", this.tick.bind(this));
 
-    // Views
-    this.webGLView = new WebGLView(this.gl);
-    this.webGLView.init();
+    // Components
+    this.webGL = new WebGL(this.gl);
+    this.webGL.init();
 
     this.onResize();
+  }
+
+  start() {
     this.engine.start();
   }
 
+  stop() {
+    this.engine.stop();
+  }
+
   tick() {
-    this.webGLView.render();
+    this.webGL.render();
 
     if (config.parameters.has("capture")) {
       capturer.capture(this.gl.canvas);
@@ -39,12 +47,11 @@ export default class AppView {
 
   @BindEvent("resize")
   onResize(event) {
-    console.log(event, this.gl, this.gl.canvas.width, w.width);
     this.gl.canvas.width = w.width;
     this.gl.canvas.height = w.height;
     this.gl.canvas.style.width = `${w.width}px`;
     this.gl.canvas.style.height = `${w.height}px`;
 
-    this.webGLView.resize();
+    this.webGL.resize();
   }
 }

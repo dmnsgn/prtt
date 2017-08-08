@@ -2,7 +2,7 @@ import ControlKit from "controlkit";
 
 import config from "Root/config";
 
-import capturer from "Util/capturer";
+import capturer from "Utils/capturer";
 
 export default class AppUI {
   constructor(app) {

@@ -1,7 +1,7 @@
-import Checker from "View/background/Checker";
-import Base from "View/base/Base";
+import Checker from "Components/background/Checker";
+import Base from "Components/base/Base";
 
-export default class WebGLView {
+export default class WebGL {
   constructor(gl) {
     this.gl = gl;
 
