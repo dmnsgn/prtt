@@ -1,9 +1,9 @@
-import 'babel-polyfill';
+import "babel-polyfill";
+import "whatwg-fetch";
 
-import './vendor/debouncedEvents';
+import App from "Root/App";
 
-import App from './App';
-
-document.addEventListener('DOMContentLoaded', () => {
-  window.app = new App(document.querySelector('main'), {});
+document.addEventListener("DOMContentLoaded", () => {
+  window.app = new App(document.querySelector("main"), {});
+  app.init();
 });

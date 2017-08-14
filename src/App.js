@@ -1,17 +1,34 @@
-import AppView from './view/AppView';
-import AppUI from './view/AppUI';
+import AsyncPreloader from "async-preloader";
 
-import config from './config';
+import AppView from "Containers/AppView";
+import AppUI from "Containers/AppUI";
+
+import store, { subscribe } from "State/store";
+import {
+  PRELOAD_STATUS,
+  preload,
+  preloadingStatusSelector
+} from "State/reducers/ui";
+
+import config from "Root/config";
 
 export default class App {
   constructor(element, options) {
     this.element = element;
-    this.options = Object.assign({
-      debug: config.parameters.has('debug'),
-    }, options);
+    this.options = options;
+  }
 
+  init() {
     this.initView();
-    if (this.options.debug || config.parameters.has('capture')) this.initUI();
+
+    if (config.parameters.has("debug") || config.parameters.has("capture")) {
+      this.initUI();
+    }
+
+    subscribe(preloadingStatusSelector, status => {
+      if (status === PRELOAD_STATUS.get("LOADED")) this.view.start();
+    });
+    this.preload();
   }
 
   initView() {
@@ -22,5 +39,10 @@ export default class App {
   initUI() {
     this.ui = new AppUI(this);
     this.ui.init();
+  }
+
+  async preload() {
+    await AsyncPreloader.loadItems([]);
+    store.dispatch(preload(PRELOAD_STATUS.get("LOADED")));
   }
 }
