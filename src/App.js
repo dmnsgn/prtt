@@ -4,7 +4,11 @@ import AppView from "Containers/AppView";
 import AppUI from "Containers/AppUI";
 
 import store, { subscribe } from "State/store";
-import { PRELOAD_STATUS, preload, getLoadingState } from "State/reducers/ui";
+import {
+  PRELOAD_STATUS,
+  preload,
+  preloadingStatusSelector
+} from "State/reducers/ui";
 
 import config from "Root/config";
 
@@ -16,24 +20,15 @@ export default class App {
 
   init() {
     this.initView();
+
     if (config.parameters.has("debug") || config.parameters.has("capture")) {
       this.initUI();
     }
 
-    this.preload();
-  }
-
-  preload() {
-    subscribe(getLoadingState, state => {
-      this.view.start();
+    subscribe(preloadingStatusSelector, status => {
+      if (status === PRELOAD_STATUS.get("LOADED")) this.view.start();
     });
-
-    const pItems = AsyncPreloader.loadItems([]);
-    pItems
-      .then(items => {
-        store.dispatch(preload(PRELOAD_STATUS.get("LOADED")));
-      })
-      .catch(error => console.error("Error loading items", error));
+    this.preload();
   }
 
   initView() {
@@ -44,5 +39,10 @@ export default class App {
   initUI() {
     this.ui = new AppUI(this);
     this.ui.init();
+  }
+
+  async preload() {
+    await AsyncPreloader.loadItems([]);
+    store.dispatch(preload(PRELOAD_STATUS.get("LOADED")));
   }
 }

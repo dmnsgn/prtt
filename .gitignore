@@ -1,4 +1,2 @@
 node_modules
-dist/*
-!dist/static/
-!dist/static/.gitkeep
+dist/bundle.js

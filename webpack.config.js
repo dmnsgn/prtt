@@ -1,6 +1,8 @@
-var path = require("path");
+const path = require("path");
 
-var src = "./src";
+const src = "./src";
+
+const NODE_ENV = process.env.NODE_ENV;
 
 module.exports = {
   entry: src + "/index.js",
@@ -11,7 +13,7 @@ module.exports = {
   devServer: {
     contentBase: "./dist"
   },
-  devtool: "inline-source-map",
+  devtool: NODE_ENV !== "production" ? "source-map" : false,
   resolve: {
     alias: {
       Root: path.resolve(src),
@@ -26,7 +28,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules)/,
         use: {
           loader: "babel-loader",
           options: {
@@ -36,7 +38,12 @@ module.exports = {
               "transform-class-properties",
               "transform-object-rest-spread",
               "glslify"
-            ]
+            ],
+            env: {
+              production: {
+                presets: ["minify"]
+              }
+            }
           }
         }
       }

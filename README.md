@@ -1,7 +1,7 @@
 prtt
 =========================
 
-> A WebGL prototype starter using Budo, browserify, babelify, glslify, controlkit, ccapture
+> A WebGL prototype starter using webpack, redux, babel, glslify, controlkit, ccapture
 
 ## Install
 ```bash
@@ -13,13 +13,13 @@ npm i
 ### Dev
 
 ```bash
-npm run dev
+npm start
 ```
 
 ### Build
 
 ```bash
-npm run build
+npm run prod
 ```
 
 |Query string parameters|Description

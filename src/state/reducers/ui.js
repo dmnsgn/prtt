@@ -1,5 +1,4 @@
 import { createAction, handleActions } from "redux-actions";
-import { createSelector } from "reselect";
 
 // Constants
 export const PRELOAD_STATUS = new Map()
@@ -16,7 +15,7 @@ const defaultState = {
 };
 
 // Selectors
-export const getLoadingState = state => state.ui.preloaded;
+export const preloadingStatusSelector = state => state.ui.preloaded;
 
 // Reducer
 const reducer = handleActions(

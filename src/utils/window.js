@@ -27,7 +27,7 @@ const w = {
   devicePixelRatio: window.devicePixelRatio || 1,
 
   init() {
-    this.updateDimensions();
+    this.onResize();
   },
 
   get physicalWidth() {
@@ -39,7 +39,7 @@ const w = {
   },
 
   @BindEvent("resize")
-  updateDimensions() {
+  onResize() {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
     this.center = { x: this.width / 2, y: this.height / 2 };

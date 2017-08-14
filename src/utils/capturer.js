@@ -1,6 +1,6 @@
 import CCapture from "ccapture.js";
 
-import config from "../config";
+import config from "Root/config";
 
 const framerate = 30;
 
