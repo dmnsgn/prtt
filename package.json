@@ -1,6 +1,6 @@
 {
   "name": "prtt",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "A WebGL prototype starter using webpack, redux, babel, glslify, controlkit, ccapture",
   "main": "src/index.js",
   "homepage": "https://github.com/dmnsgn/prtt",
