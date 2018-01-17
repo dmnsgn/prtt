@@ -1,7 +1,7 @@
 import Engine from "raf-loop";
 import getContext from "get-canvas-context";
 
-import WebGL from "Containers/WebGL";
+import ThreeView from "Containers/ThreeView";
 
 import w, { BindEvent } from "Utils/window";
 import capturer from "Utils/capturer";
@@ -14,19 +14,13 @@ export default class AppView {
   }
 
   init() {
-    // Context
-    this.gl = getContext("webgl");
-    this.app.element.appendChild(this.gl.canvas);
-
     // Engine
     this.engine = new Engine();
     this.engine.on("tick", this.tick.bind(this));
 
     // Components
-    this.webGL = new WebGL(this.gl);
-    this.webGL.init();
-
-    this.onResize();
+    this.threeView = new ThreeView(this.app.element, this.app.options);
+    this.threeView.init();
   }
 
   start() {
@@ -38,20 +32,10 @@ export default class AppView {
   }
 
   tick() {
-    this.webGL.render();
+    this.threeView.render();
 
     if (config.parameters.has("capture")) {
-      capturer.capture(this.gl.canvas);
+      capturer.capture(this.threeView.canvas);
     }
-  }
-
-  @BindEvent("resize")
-  onResize(event) {
-    this.gl.canvas.width = w.width;
-    this.gl.canvas.height = w.height;
-    this.gl.canvas.style.width = `${w.width}px`;
-    this.gl.canvas.style.height = `${w.height}px`;
-
-    this.webGL.resize();
   }
 }

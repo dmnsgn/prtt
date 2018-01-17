@@ -1,44 +1,20 @@
-import glsl from "glslify";
-import createShader from "gl-shader";
+import { Mesh, BoxBufferGeometry, MeshBasicMaterial } from "three";
 
-export default class Base {
-  constructor(gl) {
-    this.gl = gl;
+export default class Base extends Mesh {
+  constructor(view) {
+    const geometry = new BoxBufferGeometry(1, 1, 1);
+    const material = new MeshBasicMaterial({ color: 0x00ff00 });
+
+    super(geometry, material);
+    this.view = view;
   }
 
   init() {
-    this.shader = createShader(
-      this.gl,
-      glsl("../../shaders/base.vert"),
-      glsl("../../shaders/base.frag")
-    );
-
-    this.buffer = this.gl.createBuffer();
-    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer);
-    this.gl.bufferData(
-      this.gl.ARRAY_BUFFER,
-      // prettier-ignore
-      new Float32Array([
-        -0.5, 0, 0,
-        0, -1, 0,
-        0.5, 0.5, 0
-      ]),
-      this.gl.STATIC_DRAW
-    );
+    this.view.scene.add(this);
   }
 
-  draw() {
-    // Bind shader
-    this.shader.bind();
-
-    // Set attributes
-    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer);
-    this.shader.attributes.position.pointer();
-
-    // Set uniforms
-    this.shader.uniforms.t += 0.01;
-
-    // Draw
-    this.gl.drawArrays(this.gl.TRIANGLES, 0, 3);
+  update() {
+    this.rotation.x += 0.01;
+    this.rotation.y += 0.02;
   }
 }
