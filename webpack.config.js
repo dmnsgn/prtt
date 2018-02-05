@@ -27,13 +27,38 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(glsl|frag|vert)$/,
+        use: [
+          {
+            loader: "raw-loader",
+            options: {}
+          },
+          {
+            loader: "glslify-loader",
+            options: {}
+          }
+        ]
+      },
+      {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["env"],
+            presets: [
+              [
+                "env",
+                {
+                  modules: false,
+                  useBuiltIns: false,
+                  targets: {
+                    browsers: ["last 2 versions", "safari >= 7"]
+                  }
+                }
+              ]
+            ],
             plugins: [
+              "transform-es2015-modules-commonjs",
               "transform-decorators-legacy",
               "transform-class-properties",
               "transform-object-rest-spread",
