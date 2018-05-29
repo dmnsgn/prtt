@@ -1,4 +1,5 @@
 const path = require("path");
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 
 const src = "./src";
 
@@ -10,6 +11,9 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist")
   },
+  mode: ["production", "development"].includes(NODE_ENV)
+    ? NODE_ENV
+    : "production",
   devServer: {
     contentBase: "./dist"
   },
@@ -24,6 +28,9 @@ module.exports = {
       Utils: path.resolve(src, "utils/")
     }
   },
+  plugins: [NODE_ENV === "production" ? new MinifyPlugin() : undefined].filter(
+    Boolean
+  ),
   module: {
     rules: [
       {
@@ -47,10 +54,8 @@ module.exports = {
           options: {
             presets: [
               [
-                "env",
+                "@babel/preset-env",
                 {
-                  modules: false,
-                  useBuiltIns: false,
                   targets: {
                     browsers: ["last 2 versions", "safari >= 7"]
                   }
@@ -58,17 +63,12 @@ module.exports = {
               ]
             ],
             plugins: [
-              "transform-es2015-modules-commonjs",
-              "transform-decorators-legacy",
-              "transform-class-properties",
-              "transform-object-rest-spread",
-              "glslify"
-            ],
-            env: {
-              production: {
-                presets: ["minify"]
-              }
-            }
+              "@babel/plugin-transform-modules-commonjs",
+              ["@babel/plugin-proposal-decorators", { legacy: true }],
+              "@babel/plugin-proposal-class-properties",
+              "@babel/plugin-proposal-object-rest-spread",
+              "@babel/plugin-transform-runtime"
+            ]
           }
         }
       }
